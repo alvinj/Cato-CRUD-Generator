@@ -1,0 +1,127 @@
+Project Cato Installation File
+
+INSTALLING CATO
+---------------
+
+As you'll see, I've tried to make installing Cato as easy as possible.
+If you have a decent PHP environment already set up, the installation
+should be a very simple process.
+
+DEPENDENCIES
+------------
+
+Cato has been tested with:
+
+  * The Apache web server
+  * The MySQL database server
+  * PHP version 5.3
+  * Mac OS X 10.5 and 10.6
+
+It will probably work with other PHP 5.x systems. It will probably also
+work with other web servers, databases, and it should work on Windows
+and Linux systems. There is nothing Mac-specific about Cato, except the
+default configuration files.
+
+Cato requires:
+
+  * The PHP MDB2 module
+  * The Smarty templating system
+
+With this release, these tools are now included with Cato to
+make the installation process as easy as possible.
+
+INSTALLATION INSTRUCTIONS
+-------------------------
+
+With these two assumptions:
+
+  1 You already have Apache, MySQL, and PHP installed.
+  2 You already have the database for your project installed
+    in your MySQL database.
+
+you can install Cato very easily, as follows.
+
+1) Set up a directory where you can install the Cato files.
+   Cato is known to work with Apache, so the easiest way to
+   install Cato is in an Apache 'htdocs' directory. On my Mac 
+   I use MAMP, so Cato goes in this directory:
+   
+   /Applications/MAMP/htdocs/cato
+
+2) While this step is optional, I've found it easier when 
+   I have multiple web apps running on my computer.
+
+   Create an entry in your "hosts" file for Cato. On my Mac
+   I edit /etc/hosts, and add an entry for Cato like this:
+   
+   127.0.0.1   cato
+
+   In the real world, my actual entry looks like this:
+   
+   127.0.0.1   localhost sleetmute drupal6 cato
+
+3) Edit the Cato configuration files. The main file you
+   need to configure is "db.cfg". This file tells Cato how to 
+   connect to your database. On my system that file looks like
+   this:
+   
+   $dsn = array(
+     'phptype'  => 'mysql',
+     'username' => 'root',
+     'password' => 'root',
+     'hostspec' => 'localhost',
+     'database' => 'drupal6',
+     'port' => '/Applications/MAMP/tmp/mysql/mysql.sock'
+    );
+
+   If you're not using MAMP, you'll also have to edit the 
+   "app.cfg" file. There are just a couple of settings in that
+   file, and it should be well-documented.
+   
+   There is also a file named "smarty.cfg", which you'll only need
+   to edit if you want to create some Smarty template variables.
+   (This is really just for advanced users.)
+
+4) Start/restart Apache. Again, I use MAMP, so I just restart
+   Apache through the MAMP UI. Because MAMP runs Apache on
+   port 8888 by default, I can now access the Cato UI through
+   this URL:
+
+   http://cato:8888/
+
+At this point Cato should be up and running. If you haven't already
+watched the video on how to use Cato, I recommend watching it now:
+
+  http://www.catocrudgenerator.com/screenshots-crud-generator/
+
+You can also find more information at the Cato project pages:
+
+  http://www.catocrudgenerator.com
+
+
+NO PHP?
+-------
+
+If you don't have PHP installed on your system, I'm afraid I won't 
+be of too much help, but I'll give you what I can.
+
+On Mac OS X systems, I *strongly* recommend using MAMP for PHP/MySQL 
+development. You can download MAMP here:
+
+  http://www.mamp.info
+
+For Linux systems, I'll be really surprised if PHP isn't installed 
+by default. If it isn't, you can probably using RPM or YUM to install 
+it very easily.
+
+For Windows, and for Linux systems without PHP installed, the best I 
+can do is point you to the main PHP website:
+
+  http://php.net
+
+Just download the stable release from there.
+
+
+
+
+

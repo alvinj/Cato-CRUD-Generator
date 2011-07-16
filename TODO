@@ -1,0 +1,12 @@
+Development To-Do List
+
+* more and better templates
+  * also create my own form style sheet api, or use the Rails or
+    Cake CSS naming conventions
+* better accounting for data types and database field names
+  * textarea instead of text field (if i can detect varchar size, or related types)
+  * drop-downs, checkboxes, and radio buttons where appropriate
+  * date field widget based on type and/or field name
+* handle the plural to singular conversions Cake and Rails handle
+* clean up the root directory
+

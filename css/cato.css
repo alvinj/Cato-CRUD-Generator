@@ -1,0 +1,188 @@
+/**
+ * this is a fixed-width style sheet for cato.
+ * i'd prefer a variable width style sheet, but i was having
+ * problems with elements flowing, so i've settled for this
+ * for the time being.
+ */
+
+body {
+  margin-left: 36px;
+  margin-right: 30px;
+  margin-top: 12px;
+  background-color: #72C1B0;
+  font-size: 100%; /* Fixes exaggerated text resizing in IE6 and IE7 */
+  width: 860px;
+}
+
+body, caption, th, td, input, textarea, select, option, legend, fieldset
+{
+  font-family: "Lucida Grande", Arial, Verdana, sans-serif;
+  font-size: 80%;
+}
+
+textarea {
+  font-family: Monaco;
+  font-size: 13px;
+}
+
+/* TODO this looks really different between firefox and chrome */
+select {
+  font-size: 1em;
+}
+
+#button input {
+  font-size: 1.1em;
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px;
+  margin:0 7px 0 0;
+  color:#565656;
+  background-color: #a2cc3;
+  background-color:#f5f5f5;
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+  font-weight:bold;
+  cursor:pointer;
+  padding:6px 10px 6px 7px;
+  margin-left: 2px;
+}
+
+#button input:hover {
+  color: #222;
+}
+
+#button {
+  text-align: center;
+  margin-top: 1.6em;
+}
+
+p {
+  line-height: 1.4em;
+}
+
+/* H2 tags */
+
+h2 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 4px;
+  padding-left: 28px;
+  color: #555;
+}
+
+#tables h2 {
+  background: url(/images/1.png) top left no-repeat;
+}
+
+#fields h2 {
+  background: url(/images/2.png) top left no-repeat;
+}
+
+#templates h2 {
+  background: url(/images/3.png) top left no-repeat;
+}
+
+#right-column h2 {
+  background: url(/images/3.png) top left no-repeat;
+  /* had to float this to get the image to work */
+  float: left;
+  display: block;
+}
+
+/* THE PAGE LAYOUT */
+
+#header {
+  height: 22px;
+  background-color: #9dc8be;
+  padding: 1.6em;
+  margin-bottom: 2.4em;
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px;
+}
+
+#header h1 {
+  float: left;
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  color: #222;
+}
+
+#left-column {
+  float: left;
+  width: 240px;
+  margin-top: 0;
+  margin-right: 1.6em;
+  padding-right: 1em;
+  padding-left: 4px;
+}
+
+#right-column {
+  position: absolute;
+  margin: 0 2em 0 268px;
+  width: 600px;
+  min-height: 700px;
+}
+
+#right-column h2 {
+  width: 600px;
+  display: block;
+}
+
+/* TODO the textarea height is very different between
+   firefox and chrome */
+#right-column textarea {
+  height: 518px;
+  width: 580px;
+  color: #333;
+  display: block;
+}
+
+select,
+#right-column textarea {
+  background-color: #f0f0f0;
+}
+
+#footer {
+  clear: both;
+  margin-top: 8em;
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+#tables,
+#fields,
+#templates {
+  display: block;
+}
+
+/* expand the selects to fill the left column */
+#tables select,
+#fields select,
+#templates select {
+  width: 100%;
+}
+
+/* a little more room beneath the tables and fields widgets */
+#tables, #fields {
+  margin-bottom: 2em;
+}
+
+/* HYPERLINKS */
+
+a:link, 
+a:visited, 
+a {
+  color: #666;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+

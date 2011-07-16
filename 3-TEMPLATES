@@ -1,0 +1,213 @@
+
+CATO TEMPLATES
+--------------
+
+Cato works by using a templating system. In short, Cato:
+
+  * Gets information about the database fields you selected.
+  * Reads the template file you selected.
+  * Replaces the placeholders in the template file with the
+    information from the database table fields you selected.
+
+The "template placeholders" you can use are essentially the 
+Cato API. These placeholders correspond to the logic currently 
+built into Cato.
+
+INTRODUCTION TO CATO TEMPLATE VARIABLES
+---------------------------------------
+
+Cato template placeholders are special variables you can use in 
+your Cato templates to have variations of the database table and
+field names be replaced in your templates.
+
+As a simple example, if you put a snippet of code like this into a
+Cato template:
+
+    <<classname>>
+
+and your current database table name is 'order_items', when your
+template output is generated, Cato will replace that variable with
+this text:
+
+    OrderItems
+
+With variables like this you can create a Java class statement with
+template code like this:
+
+    public class <<classname>> {
+
+and so on.
+
+
+CATO TEMPLATE VARIABLES
+-----------------------
+
+Here's a description of the template variables you can use
+when creating your own templates:
+
+classname  This is a 'camel case' version of the table name you
+           selected. If your table was named 'node', the classname
+           will be Node, and if the table was named 'order_items',
+           the classname will be OrderItems.
+
+objectname This is also a 'camel case' version of the table name you
+           selected, but the first character will be in lowercase. I
+           originally created this for Java object names. So, if your 
+           table was named 'node', the objectname will be node, and 
+           if the table was named 'order_items', the objectname will 
+           be orderItems.
+
+tablename  This field is the name of your database table, without
+           any conversion at all. So, a table named 'node' will be
+           node here, and a table named order_items will be 
+           order_items here.
+
+fields     This is a PHP array of your database field names, returned
+           just as the names are in the database table (so 'order_items'
+           in the table will be 'order_items' here as well). This is
+           useful for languages like PHP and Ruby where the underscore
+           character is often used in variable names.
+
+fields_as_insert_csv_string
+
+           This variable is a string, in CSV format, of the fields
+           you selected. It will look something like this:
+           'id, first_name, last_name, email'.
+
+java_fields
+
+           This is a PHP array of your database field names, returned
+           as camelcase names, using the same convention as the 
+           objectname variable, so a field like 'order_items' will be
+           'orderItems' here. As the name implies, this field naming
+           convention is most often used in languages like Java.
+
+prep_stmt_as_insert_csv_string
+
+           The best way to describe this field is to show how it should
+           be used in a Cato template. Two template lines like these:
+           
+               $sql = "INSERT INTO {<<$tablename>>}"
+                    . " (<<$fields_as_insert_csv_string>>) "
+                    . " VALUES (<<$prep_stmt_as_insert_csv_string>>)";
+               $sql_fields = "<<$fields_as_insert_csv_string>>";
+             
+           will be converted to these lines when they are applied to 
+           a Drupal database table named actions:
+
+               $sql = "INSERT INTO {actions}"
+                    . " (aid,type,callback,parameters,label) "
+                    . " VALUES (?,?,?,?,?)";
+               $sql_fields = "aid,type,callback,parameters,label";
+
+prep_stmt_as_update_csv_string
+
+           The best way to describe this field is to show an example of 
+           how it should be used in a Cato template. A few template lines
+           like these:
+           
+               String query = "UPDATE <<$tablename>> SET "
+                            + "<<$prep_stmt_as_update_csv_string>>"
+                            + " WHERE id =?";
+
+               PreparedStatement preparedStatement = connection.prepareStatement(query);
+               <<section name=updateid loop=$fields>>
+                preparedStatement.set<<$types[updateid]|capitalize>>(<<$smarty.section.updateid.index_next>>,
+                <<$objectname>>.get<<$fields[updateid]|capitalize>>();
+                <<assign var="nfields" value=$smarty.section.updateid.index_next>>
+               <</section>>
+
+               <<* using the smarty math function to get the right number here *>>
+               preparedStatement.setInt(<<math equation="x + y" x=$nfields y=1>>, <<$objectname>>.getId());
+           
+           will be converted to these lines when they are applied to 
+           a Drupal database table named actions:
+
+              String query = "UPDATE actions SET "
+                          + "aid=?,type=?,callback=?,parameters=?,label=?"
+                          + " WHERE id =?";
+
+              // smarty template note: index_next lets the index start at 1 instead of 0
+              // do all the 'set' statements for the fields
+              PreparedStatement preparedStatement = connection.prepareStatement(query);
+              preparedStatement.setString(1, action.getAid();
+              preparedStatement.setString(2, action.getType();
+              preparedStatement.setString(3, action.getCallback();
+              preparedStatement.setObject(4, action.getParameters();
+              preparedStatement.setString(5, action.getLabel();
+              // set the key
+              preparedStatement.setInt(6, action.getId());
+
+           (There may be a few errors with that code block due to formatting
+           problems here. See the sample template named 'java-dao.tpl' for
+           the correct example.)
+
+types      This is an array of "field types". There should be one
+           type for each field, and the "type" corresponds to what
+           Cato thinks the Java type should be for this field.
+           Typical types are String, int
+
+
+TEMPLATE RECIPE - HTML FORM FIELDS
+----------------------------------
+
+To create form fields for an HTML (or JSP) page, use a loop like this
+to create your fields:
+
+  <<section name=id loop=$camelcase_fields>>
+    <tr>
+      <td class="form_label">
+        <label for="<<$fields[id]>>"><<$fields[id]|replace:'_':' '|capitalize>></label>
+      </td>
+      <td class="form_field">
+        <input type="text" id="<<$fields[id]>>" name="<<$camelcase_fields[id]>>">
+      </td>
+    </tr>
+  <</section>>
+
+This loop results in form output that looks like this:
+
+  <tr>
+    <td class="form_label">
+      <label for="name">Name</label>
+    </td>
+    <td class="form_field">
+      <input type="text" id="name" name="name">
+    </td>
+  </tr>
+  <tr>
+    <td class="form_label">
+      <label for="mail">Mail</label>
+    </td>
+    <td class="form_field">
+      <input type="text" id="mail" name="mail">
+    </td>
+  </tr>
+
+(Of course if you don't like tables, just change that template code as desired.
+You may also want to change the CSS class names used in the form, but again,
+that's an easy change.)
+
+One of the keys in this template is this piece of code that creates
+each form field label:
+
+  <<$fields[id]|replace:'_':' '|capitalize>>
+
+This snippet of code is very powerful, and you'll use it often,
+primarily for creating form field labels, as shown here, and also
+for table header labels.
+
+Assuming a database table field is named 'first_name', this snippet of
+code does the following:
+
+   * Converts first_name to 'first name'
+   * Converts 'first name' to 'First Name'
+
+The first change happens because of the Smarty 'replace' command,
+and the second change comes from the Smarty 'capitalize' command.
+
+
+
+
+
+

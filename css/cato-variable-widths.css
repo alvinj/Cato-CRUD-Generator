@@ -1,0 +1,175 @@
+body {
+  margin-left: 8%;
+  margin-right: 8%;
+  width: 900px;
+  margin-top: 12px;
+  background-color: #72C1B0;
+  font-size: 100%; /* Fixes exaggerated text resizing in IE6 and IE7 */
+}
+
+body, caption, th, td, input, textarea, select, option, legend, fieldset {
+  font-family: "Lucida Grande",Arial,Verdana,sans-serif;
+  font-size: 80%;
+}
+
+textarea {
+  font-family: Monaco;
+  font-size: 12px;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 4px;
+  padding-left: 28px;
+  color: #555;
+}
+
+#tables h2 {
+  background: url('/images/1.png') top left no-repeat;
+}
+
+#fields h2 {
+  background: url('/images/2.png') top left no-repeat;
+}
+
+#templates h2 {
+  background: url('/images/3.png') top left no-repeat;
+}
+
+#right-column h2 {
+  background: url('/images/4.png') top left no-repeat;
+  /* had to float this to get the image to work */
+  float: left;
+  /* had to do this to keep the textarea below the h2 tag */
+  width: 590px;
+  display: block;
+}
+
+/* HYPERLINKS */
+
+a:link, 
+a:visited, 
+a {
+  color: #666;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* THE PAGE LAYOUT */
+
+#header {
+  height: 26px;
+  margin: 0;
+  padding: 1.1em;
+  padding-bottom: 1.6em;
+  background-color: #9dc8be;
+  margin-bottom: 3em;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+}
+
+#header h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  color: #222;
+  vertical-align: top;
+}
+
+#left-column {
+  float: left;
+  width: 240px;
+  width: 33%;
+  margin-top: 0;
+  margin-right: 1.6em;
+  padding-right: 1em;
+  padding-bottom: 20px;
+  background-color: red;
+}
+
+#right-column {
+  margin-top: 0;
+  margin-left: 0;
+  padding-top: 0;
+  padding-left: 40%;
+  background: orange;
+}
+
+#right-column textarea {
+  height: 500px;
+  width: 616px;
+  color: #333;
+  display: block;
+}
+
+select,
+#right-column textarea {
+  background-color: #f0f0f0;
+}
+
+#footer {
+  clear: both;
+  margin-top: 8em;
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+#tables,
+#fields,
+#templates {
+  display: block;
+}
+
+#tables select,
+#fields select,
+#templates select {
+  width: 100%;
+}
+
+/* a little more room beneath the tables and fields widgets */
+#tables, #fields {
+  margin-bottom: 2em;
+}
+
+div#button {
+  text-align: center;
+  margin-top: 1em;
+}
+
+select {
+  font-size: 1em;
+}
+
+#button input {
+  font-size: 1.1em;
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px;
+  margin:0 7px 0 0;
+  color:#565656;
+  background-color: #a2cc3;
+  background-color:#f5f5f5;
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+  font-weight:bold;
+  cursor:pointer;
+  padding:6px 10px 6px 7px;
+  margin-left: 2px;
+}
+
+#button input:hover {
+  color: #222;
+}
+
+p {
+  line-height: 1.4em;
+}
+
+
+
+
+
