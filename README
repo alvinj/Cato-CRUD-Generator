@@ -1,0 +1,83 @@
+Project Cato README File
+
+INTRODUCTION
+------------
+
+Cato is a CRUD generator that can be used to generate files for any 
+programming language or tool. For instance, you can generate any of 
+these CRUD-based files, and many more:
+
+  * Java model classes
+  * Java JSP files
+  * Spring Framework XML files
+  * Ruby on Rails files
+  * CakePHP files
+  * Drupal form files
+  * SQL statements for any language
+  * Anything else you can imagine that can be driven off your
+    database tables
+
+All you have to do is tell Cato where your database is, define
+some template files (as needed), then point and click to
+generate whatever file you want that can be based off your 
+database definition.
+
+This is essentially the same process used in the "generate"
+processes of Ruby on Rails and CakePHP, but it is (a) independent of 
+programming language, and (b) available through a web GUI.
+
+
+USING CATO
+----------
+
+Once installed, using Cato is easy to use. From the main screen:
+
+  1 Select the database table you'd like to generate CRUD from.
+  2 Select the table fields you want to include.
+  3 Select the template for the output you want to generate.
+  4 Click the "Generate" button.
+
+You can see a short demo in action at this URL:
+
+  http://www.catocrudgenerator.com/screenshots-crud-generator/
+
+Our INSTALL file describes the process of installing Cato, which
+we've also tried to make as painless as possible.
+
+
+TEMPLATE FILES
+--------------
+
+As you saw in that demo, Cato generates its CRUD output based on
+template files. As a result, if you can define the template file
+for what you want, you can easily generate CRUD-based output.
+
+Many template files are included as examples. You can use those, or
+just use them as examples to create your own template files.
+
+The templating language is based on the Smarty template project.
+We've documented this in our TEMPLATES documentation page, and you
+can learn much more about Smarty templates at this URL:
+
+  http://www.smarty.net/
+
+
+MORE INFORMATION
+----------------
+
+You can find more information about the Cato Project at this URL:
+
+  http://www.catocrudgenerator.com
+
+
+THE NAME "CATO"
+---------------
+
+The name "Cato" comes from the character on the old Pink Panther
+movies. When I (Alvin Alexander) first started developing this 
+project, I thought that this app should be an "assistant" to me
+when developing database applications. As soon as I thought of 
+"assistant" I thought of Cato, Inspector Clouseau's trusty 
+assistant.
+
+
