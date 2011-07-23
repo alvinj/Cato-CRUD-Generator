@@ -1,4 +1,6 @@
 /lib
+/compile
+/templates_c
 .DS_Store
 *gz
 *.zip

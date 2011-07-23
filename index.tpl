@@ -2,7 +2,7 @@
 
 <head>
   <title>Cato</title>
-  <link type="text/css" rel="stylesheet" media="all" href="/css/cato.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="{$leading_uri}/css/cato.css" />
   <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
   <script type="text/javascript" src="js/jquery.copy.min.js"></script>
 </head>
@@ -16,7 +16,7 @@
 </div>
 
 <!-- the form wraps pretty much everything -->
-<form action="ws_gen_code.php" method="post">
+<form action="{$leading_uri}/ws_gen_code.php" method="post">
 
 <!-- start left-column -->
 <div id="left-column">
@@ -114,7 +114,7 @@ $('form').submit(function(event) {
  */
 $(function() {
   $("select#tables").change(function() {
-    $.getJSON("/ws_get_table_names.php", { table: $(this).val(), ajax: 'true' }, function(j) {
+    $.getJSON("{$leading_uri}/ws_get_table_names.php", { table: $(this).val(), ajax: 'true' }, function(j) {
       //alert("JSON success!");
       var options = '';
       for (var i = 0; i < j.length; i++) {

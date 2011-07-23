@@ -30,6 +30,11 @@ class MainController
     # get the list of the user's template files
     $templates = $this->get_list_of_templates($template_dir);
     # assign the smarty variables, then display the main page
+    
+    # TODO is there a better way to do this include? 
+    #      in particular i need the leading_uri here.
+    include('app.cfg');
+    $smarty->assign('leading_uri', $leading_uri);
     $smarty->assign('tables', $tables);
     $smarty->assign('templates', $templates);
     $smarty->display('index.tpl');
