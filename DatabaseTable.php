@@ -22,8 +22,15 @@
 class DatabaseTable
 {
 
-  # the name of the database table in the database
+  # the raw (unmodified) name of the database table in the database
   private $raw_table_name;
+
+  # the possibly-modified name of the database table that you get after
+  # the prefix has been removed. ex: 'myapp_projects' becomes 'projects'.
+  private $table_name_no_prefix;
+  
+  # any prefix you have before your table names, like 'myapp_'
+  private $tablename_prefix;
 
   # the name of the database table as converted to a java classname
   # (camelcase rules for a class)
@@ -41,6 +48,11 @@ class DatabaseTable
   # the field types as they translate to java
   private $java_field_types = array();
   
+  function set_tablename_prefix($tablename_prefix)
+  {
+    $this->tablename_prefix = $tablename_prefix;
+  }
+
   function get_raw_table_name()
   {
     return $this->raw_table_name;
@@ -49,6 +61,56 @@ class DatabaseTable
   function set_raw_table_name($name)
   {
     $this->raw_table_name = $name;
+  }
+
+  function get_table_name_no_prefix()
+  {
+    $pos = strpos($this->raw_table_name, $this->tablename_prefix);
+    if ($pos !== false)
+    {
+      # the prefix ('myapp_') was found in the raw table name ('myapp_projects')
+      $len = strlen($this->tablename_prefix);
+      $this->table_name_no_prefix = substr($this->raw_table_name, $len);
+    }
+    return $this->table_name_no_prefix;
+  }
+
+  /**
+   * returns the clean (prefix-removed), singular ('ies' -> 'y') table name.
+   */
+  function get_table_name_no_prefix_singular()
+  {
+    #------------------------------------------------------------------------
+    # TODO - PROBABLY WANT TO ADD A SWITCH SOMEWHERE (APP.CFG) TO LET THE
+    #        USER CONTROL THIS BEHAVIOR.
+    #------------------------------------------------------------------------
+    # TODO - CLEAN UP THIS CODE. WANT A TESTABLE CLASS DEDICATED TO THIS.
+    #------------------------------------------------------------------------
+    # convert strings like 'entities' to 'entity'
+    $singular_table_name = $this->table_name_no_prefix;
+
+    $pattern1 = '/ies$/';
+    $replacement1 = 'y';
+
+    # convert strings like 'processes' to 'process'
+    $pattern2 = '/es$/';
+    $replacement2 = '';
+
+    # remove trailing 's' if it's not preceded by a vowel. works for things
+    # like dogs, cats, process_groups, etc.
+    $pattern3 = '/([bcdfghjklmnpqrstvwxyz])s$/';
+    $replacement3 = '$1';
+
+    # only match one pattern
+    if (preg_match($pattern1, $singular_table_name) > 0) {
+      $singular_table_name = preg_replace($pattern1, $replacement1, $singular_table_name);
+    } elseif (preg_match($pattern2, $singular_table_name) > 0) {
+      $singular_table_name = preg_replace($pattern2, $replacement2, $singular_table_name);
+    } elseif (preg_match($pattern3, $singular_table_name) > 0) {
+      $singular_table_name = preg_replace($pattern3, $replacement3, $singular_table_name);
+    }
+
+    return $singular_table_name;
   }
 
   # set the raw database table field names array
@@ -61,6 +123,11 @@ class DatabaseTable
   function set_db_field_types($field_types)
   {
     $this->db_field_types = $field_types;
+  }
+  
+  function get_db_field_types()
+  {
+    return $this->db_field_types;
   }
   
   # returns an array of java field types that corresponds to the database

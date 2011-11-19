@@ -1,5 +1,9 @@
 Development To-Do List
 
+* get rid of leading spaces in template output
+* let user specify a leading/pre-pended portion of a table name, like
+  my 'sleet' example (sleet_projects instead of projects)
+* drop 's' at the end of names where neeeded; replace 'ies' with 'y'
 * more and better templates
   * also create my own form style sheet api, or use the Rails or
     Cake CSS naming conventions

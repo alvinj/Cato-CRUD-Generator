@@ -84,8 +84,7 @@ $mdb->loadModule('Manager');
 # command line version of cato
 #$table_field_names = $mdb->listTableFields($tablename);
 
-# now i get the field names from the form that is submitted
-# to us
+# now i get the field names from the form that is submitted to us
 $table_field_names =& $fields;
 $nfields = count($table_field_names);
 
@@ -101,6 +100,7 @@ $result =& $mdb->query($query, true, true);
 # as an array:
 $dt = new DatabaseTable();
 $dt->set_raw_table_name($tablename);
+$dt->set_tablename_prefix($tablename_prefix);
 $dt->set_raw_field_names($table_field_names);
 $dt->set_db_field_types($result->types);
 
@@ -108,12 +108,15 @@ $dt->set_db_field_types($result->types);
 $smarty->assign('classname', $dt->get_camelcase_table_name());
 $smarty->assign('objectname', $dt->get_java_object_name());
 $smarty->assign('tablename', $tablename);
+$smarty->assign('tablename_no_prefix', $dt->get_table_name_no_prefix());
+$smarty->assign('tablename_no_prefix_singular', $dt->get_table_name_no_prefix_singular());
 $smarty->assign('fields', $table_field_names);
 $smarty->assign('camelcase_fields', $dt->get_camelcase_field_names());
 $smarty->assign('fields_as_insert_csv_string', $dt->get_fields_as_insert_stmt_csv_list());
 $smarty->assign('prep_stmt_as_insert_csv_string', $dt->get_prep_stmt_insert_csv_string());
 $smarty->assign('prep_stmt_as_update_csv_string', $dt->get_fields_as_update_stmt_csv_list());
 $smarty->assign('types', $dt->get_java_field_types());
+$smarty->assign('db_types', $dt->get_db_field_types());
 $smarty->assign('dt', $dt);
 
 # read and process the template with fetch(), then echo it out

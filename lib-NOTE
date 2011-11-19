@@ -1,4 +1,4 @@
-In deployment the lib directory should contain Smart and MDB2, but
+In deployment the lib directory should contain Smarty and MDB2, but
 they shouldn't be in Git, so I've added them to the .gitignore file.
 
 (The lib directory should actually contain 'Smarty' and 'php', and

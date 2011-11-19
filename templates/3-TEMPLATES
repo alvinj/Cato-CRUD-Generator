@@ -50,6 +50,12 @@ classname  This is a 'camel case' version of the table name you
            will be Node, and if the table was named 'order_items',
            the classname will be OrderItems.
 
+db_types   This is an array of database types corresponding to fields. 
+           Instead of the Java types available in the 'types' array, 
+           these are database types like integer, blob, timestamp, 
+           etc. The type db_types[0] corresponds to the field 
+           fields[0], and so on.
+
 objectname This is also a 'camel case' version of the table name you
            selected, but the first character will be in lowercase. I
            originally created this for Java object names. So, if your 
@@ -141,6 +147,26 @@ prep_stmt_as_update_csv_string
            (There may be a few errors with that code block due to formatting
            problems here. See the sample template named 'java-dao.tpl' for
            the correct example.)
+
+tablename_no_prefix
+
+           Converts something like sleetmute_process_groups to 
+           Process_Groups. This was created to help remove database 
+           table prefixes. For instance, I'm currently developing an 
+           application where every table has the prefix 'sleetmute_', 
+           so with the $tablename_prefix setting in the db.cfg file 
+           and the use of this field in my templates, I can get rid 
+           of the 'sleetmute_' with this $tablename_no_prefix field. 
+           See my Drupal 7 templates for many examples of this.
+
+tablename_no_prefix_singular
+
+           This field converts a table name like sleetmute_process_groups
+           to Process_Group (no trailing 's' in this example). Using this
+           and the Smarty templates functions, you can easily convert
+           sleetmute_process_group to "Process Group", and create
+           function names like "add_process_group", "edit_process_group",
+           and create fields like "process_group_id".
 
 types      This is an array of "field types". There should be one
            type for each field, and the "type" corresponds to what
