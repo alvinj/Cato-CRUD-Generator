@@ -2,16 +2,18 @@
 
 #-------------------------------------------
 # copy and paste this code into a file named
-# "<<$tablename_no_prefix>>_edit_form.inc"
+# "<<$tablename_clean>>_form.inc"
 #-------------------------------------------
 
 #------------------------------------------------------
-# the form used to add and edit a <<$tablename_no_prefix_singular|capitalize>> object
+# the form used to add and edit a <<$tablename_clean_singular|capitalize>> object
 #------------------------------------------------------
 
 <<assign var="weight" value=10>>
-# available field types:
+# TODO: currently assume all fields are 'textfield'.
+# other field types: textarea, select, 
 # see http://www.devdaily.com/drupal/drupal-form-module-programming-examples-tutorials
+# for more examples
 <<section name=id loop=$fields>>
   <<if preg_match('/id$/', $fields[id]) == 0 >>
 $form['<<$fields[id]>>'] = array(
@@ -45,7 +47,7 @@ $form['#suffix'] = '<script type="text/javascript">'
 $form['submit'] = array(
   '#type' => 'submit',
   '#value' => 'Save',
-  '#suffix' => '<span id="cancel_button"><a href="/<<$tablename_no_prefix>>">Cancel</a></span>',
+  '#suffix' => '<span id="cancel_button"><a href="/<<$tablename_clean>>">Cancel</a></span>',
   '#weight' => 1000,
 );
 
@@ -82,9 +84,9 @@ $options = array('A' => t('Option A'),
                  'C' => t('Option C'))
 );
 $form['type'] = array(
-  '#title' => t('<<$tablename_no_prefix_singular|replace:'_':' '|capitalize>>'),
+  '#title' => t('<<$tablename_clean_singular|replace:'_':' '|capitalize>>'),
   '#type' => 'select',
-  '#description' => "Select a <<$tablename_no_prefix_singular|replace:'_':' '|capitalize>>.",
+  '#description' => "Select a <<$tablename_clean_singular|replace:'_':' '|capitalize>>.",
   '#options' => $options,
   '#weight' => 10,
   '#default_value' => $type,

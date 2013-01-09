@@ -1,8 +1,8 @@
 /**
- * The "List <<$tablename_no_prefix|replace:'_':' '|capitalize>>" table (the 'list view')
+ * The "List <<$tablename_clean|replace:'_':' '|capitalize>>" table (the 'list view')
  * ----------------------------------------------------------------------
  */
-function <<$tablename_no_prefix>>_list() {
+function <<$tablename_clean>>_list() {
 
   # FIX - limit your column headers here
   # configure the table header columns
@@ -37,12 +37,12 @@ function <<$tablename_no_prefix>>_list() {
   foreach ($results as $row) {
     $rows[] = array(
       # FIX - probably want this for your first column
-      #'<a href="/<<$tablename_no_prefix>>/edit/' . $row->id . '">' . $row->name . '</a>',
+      #'<a href="/<<$tablename_clean>>/edit/' . $row->id . '">' . $row->name . '</a>',
 <<section name=id loop=$fields>>
       $row-><<$fields[id]>>,
 <</section>>
       # last column is assumed to be a 'delete' action
-      '<a href="/<<$tablename_no_prefix>>/delete/' . $row->id . '">delete</a>',
+      '<a href="/<<$tablename_clean>>/delete/' . $row->id . '">delete</a>',
     );
   }
 
@@ -52,7 +52,7 @@ function <<$tablename_no_prefix>>_list() {
   # add the pager
   $output .= theme('pager');
 
-  $output .= '<div id="add_link"><a href="/<<$tablename_no_prefix>>/add">Add</a></div>';
+  $output .= '<div id="add_link"><a href="/<<$tablename_clean>>/add">Add</a></div>';
 
   return $output;
 }

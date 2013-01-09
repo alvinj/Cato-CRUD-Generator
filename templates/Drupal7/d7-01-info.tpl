@@ -6,6 +6,6 @@ description = The MODULENAME module.
 core = 7.x
 
 files[] = MODULENAME.module
-files[] = <<$tablename_no_prefix>>.inc
-files[] = <<$tablename_no_prefix>>_edit_form.inc
+files[] = <<$tablename>>_crud.inc
+files[] = <<$tablename>>_form.inc
 

@@ -27,7 +27,7 @@ class DatabaseTable
 
   # the possibly-modified name of the database table that you get after
   # the prefix has been removed. ex: 'myapp_projects' becomes 'projects'.
-  private $table_name_no_prefix;
+  private $clean_table_name;
   
   # any prefix you have before your table names, like 'myapp_'
   private $tablename_prefix;
@@ -45,9 +45,14 @@ class DatabaseTable
   # the database field types
   private $db_field_types = array();
 
-  # the field types as they translate to java
+  # the field types as they translate to java (and now scala)
   private $java_field_types = array();
+  private $scala_field_types = array();
+  private $play_field_types = array();
   
+  # an array that tells whether the desired fields are required (not null), or not
+  private $field_is_reqd = array();
+
   function set_tablename_prefix($tablename_prefix)
   {
     $this->tablename_prefix = $tablename_prefix;
@@ -63,54 +68,45 @@ class DatabaseTable
     $this->raw_table_name = $name;
   }
 
-  function get_table_name_no_prefix()
+  function get_clean_table_name()
   {
     $pos = strpos($this->raw_table_name, $this->tablename_prefix);
     if ($pos !== false)
     {
       # the prefix ('myapp_') was found in the raw table name ('myapp_projects')
       $len = strlen($this->tablename_prefix);
-      $this->table_name_no_prefix = substr($this->raw_table_name, $len);
+      $this->clean_table_name = substr($this->raw_table_name, $len);
     }
-    return $this->table_name_no_prefix;
+    return $this->clean_table_name;
   }
 
   /**
    * returns the clean (prefix-removed), singular ('ies' -> 'y') table name.
    */
-  function get_table_name_no_prefix_singular()
+  function get_clean_table_name_singular()
   {
     #------------------------------------------------------------------------
     # TODO - PROBABLY WANT TO ADD A SWITCH SOMEWHERE (APP.CFG) TO LET THE
     #        USER CONTROL THIS BEHAVIOR.
     #------------------------------------------------------------------------
-    # TODO - CLEAN UP THIS CODE. WANT A TESTABLE CLASS DEDICATED TO THIS.
+    # TODO - MAY WANT TO TEST THE STRING BEFORE JUST DOING THESE REPLACEMENTS
     #------------------------------------------------------------------------
     # convert strings like 'entities' to 'entity'
-    $singular_table_name = $this->table_name_no_prefix;
-
-    $pattern1 = '/ies$/';
-    $replacement1 = 'y';
-
+    $string = $this->clean_table_name;
+    $pattern = '/ies$/';
+    $replacement = 'y';
     # convert strings like 'processes' to 'process'
-    $pattern2 = '/es$/';
-    $replacement2 = '';
+    $string = preg_replace($pattern, $replacement, $string);
+    $pattern = '/es$/';
+    $replacement = '';
+    $string = preg_replace($pattern, $replacement, $string);
+    # remove trailing 's' ... in most cases
+    $pattern = '/([bcdfghjklmnpqrstvwxyz])s$/';
+    $replacement = '$1';
+    $string = preg_replace($pattern, $replacement, $string);
 
-    # remove trailing 's' if it's not preceded by a vowel. works for things
-    # like dogs, cats, process_groups, etc.
-    $pattern3 = '/([bcdfghjklmnpqrstvwxyz])s$/';
-    $replacement3 = '$1';
 
-    # only match one pattern
-    if (preg_match($pattern1, $singular_table_name) > 0) {
-      $singular_table_name = preg_replace($pattern1, $replacement1, $singular_table_name);
-    } elseif (preg_match($pattern2, $singular_table_name) > 0) {
-      $singular_table_name = preg_replace($pattern2, $replacement2, $singular_table_name);
-    } elseif (preg_match($pattern3, $singular_table_name) > 0) {
-      $singular_table_name = preg_replace($pattern3, $replacement3, $singular_table_name);
-    }
-
-    return $singular_table_name;
+    return $string;
   }
 
   # set the raw database table field names array
@@ -129,6 +125,18 @@ class DatabaseTable
   {
     return $this->db_field_types;
   }
+
+  # setter/getter for '$field_is_reqd'
+  function set_field_is_reqd($field_is_reqd)
+  {
+    $this->field_is_reqd = $field_is_reqd;
+  }
+
+  function get_field_is_reqd()
+  {
+    return $this->field_is_reqd;
+  }
+
   
   # returns an array of java field types that corresponds to the database
   # table field types. a database field of 'integer' becomes 'int',
@@ -161,6 +169,59 @@ class DatabaseTable
     return $this->java_field_types;
   }
   
+  # provides a mapping from database field types to scala field types
+  # TODO refactor the code; this is almost the same as the previous function.
+  # TODO maybe this function should be more like get_play_field_types, which does the work
+  #      of determining whether a field should be an Option or not; i currently handle this
+  #      in the template code.
+  function get_scala_field_types()
+  {
+    include 'CrudDatabaseTableFieldTypes.inc';
+
+    $count = 0;
+    foreach ($this->db_field_types as $field_type)
+    {
+      $scala_field_type = $scala_field_types_map[$field_type];
+      #echo "SCALA FIELD TYPE: $scala_field_type\n";
+      if (isset($scala_field_type)) {
+        $this->scala_field_type[$count] = $scala_field_type;
+      }
+      else {
+        # couldn't find a corresponding value in the map
+        $this->scala_field_type[$count] = 'UNKNOWN';
+      }
+      // kludge for the 'id' field
+      if ($this->raw_field_names[$count] == 'id') $this->scala_field_type[$count] = 'Long';
+      $count++;
+    }
+    return $this->scala_field_type;
+  }
+
+  # return an array of field types for the Scala Play Framework.
+  function get_play_field_types()
+  {
+    include 'CrudDatabaseTableFieldTypes.inc';
+
+    $count = 0;
+    foreach ($this->db_field_types as $field_type)
+    {
+      if ($this->field_is_reqd[$count] == true) {
+        $play_field_type = $play_reqd_field_types_map[$field_type];
+      } else {
+        $play_field_type = $play_optional_field_types_map[$field_type];
+      }
+      if (isset($play_field_type)) {
+        $this->play_field_type[$count] = $play_field_type;
+      } else {
+        $this->play_field_type[$count] = 'UNKNOWN';
+      }
+      // kludge for the 'id' field
+      if ($this->raw_field_names[$count] == 'id') $this->play_field_type[$count] = 'longNumber';
+      $count++;
+    }
+    return $this->play_field_type;
+  }
+
   
   # convert a plural name to a singular name, as in turning
   # 'users' into 'user'. useful for converting database table
