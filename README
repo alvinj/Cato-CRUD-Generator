@@ -3,7 +3,7 @@ Project Cato README File
 UPDATE
 ------
 
-As of January 9, 2013, Cato now supports the Play Framework v2.x.
+As of January 10, 2013, Cato now supports the Play Framework v2.x.
 
 
 INTRODUCTION
@@ -13,12 +13,13 @@ Cato is a CRUD generator that can be used to generate files for any
 programming language or tool. For instance, you can generate any of 
 these CRUD-based files, and many more:
 
+  * The Play Framework
+  * Drupal form files
   * Java model classes
   * Java JSP files
   * Spring Framework XML files
   * Ruby on Rails files
   * CakePHP files
-  * Drupal form files
   * SQL statements for any language
   * Anything else you can imagine that can be driven off your
     database tables
@@ -62,7 +63,7 @@ Many template files are included as examples. You can use those, or
 just use them as examples to create your own template files.
 
 The templating language is based on the Smarty template project.
-I've documented this in our TEMPLATES documentation page, and you
+I've documented this in the README-TEMPLATES file, and you
 can learn much more about Smarty templates at this URL:
 
   http://www.smarty.net/
@@ -86,7 +87,7 @@ Cato, here:
 
 See the "Play Framework 2 CRUD with Cato" video here:
 
-  http://www.youtube.com/watch?v=1MC5p9SjFIM
+  http://alvinalexander.com/scala/crud-forms-play-framework-2-cato-crud-generator
 
 
 THE NAME "CATO"
