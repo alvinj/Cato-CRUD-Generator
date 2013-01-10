@@ -27,18 +27,16 @@ Cato requires:
   * The PHP MDB2 module
   * The Smarty templating system
 
-With this release, these tools are now included with Cato to
-make the installation process as easy as possible.
+With this release these tools are now included under the 'lib' folder of
+the Cato distribution. I don't know if this is 100% legal, but it makes
+it 99% easier to get Cato up and running, especially if you're not a 
+PHP wizard.
 
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-With these two assumptions:
-
-  1 You already have Apache, MySQL, and PHP installed.
-  2 You already have the database for your project installed
-    in your MySQL database.
-
+Assuming 1) you already have Apache, MySQL, and PHP installed, and 2) you
+already have the database for your project installed in your MySQL database,
 you can install Cato very easily, as follows.
 
 1) Set up a directory where you can install the Cato files.
@@ -47,6 +45,10 @@ you can install Cato very easily, as follows.
    I use MAMP, so Cato goes in this directory:
    
    /Applications/MAMP/htdocs/cato
+
+   The easiest way to do this is to checkout the code from Github 
+   under the htdocs folder, then rename the folder from 
+   Cato-CRUD-Generator to 'cato'.
 
 2) While this step is optional, I've found it easier when 
    I have multiple web apps running on my computer.
@@ -59,6 +61,8 @@ you can install Cato very easily, as follows.
    In the real world, my actual entry looks like this:
    
    127.0.0.1   localhost sleetmute drupal6 cato
+
+   Each of those names correspond to web apps I'm currently working on.
 
 3) Edit the Cato configuration files. The main file you
    need to configure is "db.cfg". This file tells Cato how to 

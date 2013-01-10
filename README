@@ -62,7 +62,7 @@ Many template files are included as examples. You can use those, or
 just use them as examples to create your own template files.
 
 The templating language is based on the Smarty template project.
-We've documented this in our TEMPLATES documentation page, and you
+I've documented this in our TEMPLATES documentation page, and you
 can learn much more about Smarty templates at this URL:
 
   http://www.smarty.net/
@@ -84,6 +84,10 @@ Cato, here:
 
   http://www.youtube.com/watch?v=0cKzM9e26eM
 
+See the "Play Framework 2 CRUD with Cato" video here:
+
+  http://www.youtube.com/watch?v=1MC5p9SjFIM
+
 
 THE NAME "CATO"
 ---------------
@@ -96,8 +100,9 @@ when developing database applications. As soon as I thought of
 assistant.
 
 
-DEVDAILY.COM
-------------
+alvinalexander.com
+------------------
 
-This project was created by Alvin Alexander of http://www.devdaily.com
+This project was created by Alvin Alexander of http://alvinalexander.com
+
 
