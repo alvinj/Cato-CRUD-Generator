@@ -5,6 +5,11 @@
   <link type="text/css" rel="stylesheet" media="all" href="{$leading_uri}/css/cato.css" />
   <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
   <script type="text/javascript" src="js/jquery.copy.min.js"></script>
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
 </head>
 
 {* TODO - make the keywords and description more appropriate to this project/directory *}

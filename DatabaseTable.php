@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright Alvin Alexander, http://www.devdaily.com, 2011. 
+ * Copyright Alvin Alexander, http://alvinalexander.com, 2011-2014.
  * All Rights Reserved.
  *
  * This program is distributed free of charge under the terms and 

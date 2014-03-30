@@ -11,7 +11,7 @@ body {
   margin-top: 12px;
   background-color: #72C1B0;
   font-size: 100%; /* Fixes exaggerated text resizing in IE6 and IE7 */
-  width: 860px;
+  width: 1060px;
 }
 
 body, caption, th, td, input, textarea, select, option, legend, fieldset
@@ -120,12 +120,12 @@ h2 {
 #right-column {
   position: absolute;
   margin: 0 2em 0 268px;
-  width: 600px;
+  width: 800px;
   min-height: 700px;
 }
 
 #right-column h2 {
-  width: 600px;
+  width: 800px;
   display: block;
 }
 
@@ -133,7 +133,7 @@ h2 {
    firefox and chrome */
 #right-column textarea {
   height: 518px;
-  width: 580px;
+  width: 780px;
   color: #333;
   display: block;
 }

@@ -1,4 +1,4 @@
 
 <div id="footer">
-<a href="http://devdaily.com/">created by devdaily.com</a>
+<a href="http://alvinalexander.com/">created by alvin alexander</a>
 </div>
