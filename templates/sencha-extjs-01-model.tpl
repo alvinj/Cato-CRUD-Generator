@@ -1,3 +1,5 @@
+// this is a Sencha ExtJS 'Model' class
+
 // save this file as 'app/model/<<$classname|capitalize>>.js'
 // (name should be singular, like 'Stock' or 'Transaction')
 

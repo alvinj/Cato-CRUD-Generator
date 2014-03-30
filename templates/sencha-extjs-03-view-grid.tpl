@@ -1,3 +1,4 @@
+// this is a Sencha ExtJS 'Grid Panel' class
 // save this file as 'app/view/<<$classname|capitalize>>List.js'
 // VERIFY: name should be singular, like 'StockList' or 'TransactionList'
 

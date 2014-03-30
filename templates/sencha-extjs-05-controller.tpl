@@ -1,3 +1,5 @@
+// this is a Sencha ExtJS 'Controller' class
+
 //VERIFY - should be plural, like 'Stocks'
 Ext.define('<<$APPLICATION_NAME>>.controller.<<$classname|capitalize>>', {
     extend: 'Ext.app.Controller',
