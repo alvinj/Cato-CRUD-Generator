@@ -155,6 +155,21 @@ types      This is an array of "field types". There should be one
            Cato thinks the Java type should be for this field.
            Typical types are String, int
 
+scala_field_types,
+play_field_types
+
+           See my current Play Framework templates for examples of these
+           mappings. The Scala types are like Integer, String, Long, etc.
+
+           The Play types are used for Play mappings, and include types
+           like text, nonEmptyText, date, integer, etc. (See the 
+           `CrudDatabaseTableFieldTypes.inc` file for all of the mappings.)
+
+play_json_field_types
+
+           Use this to get Play JSON types like JsNumber, JsString, etc.
+           See the current `play-03-model-json.tpl` template for example use.
+
 
 TEMPLATE RECIPE - HTML FORM FIELDS
 ----------------------------------

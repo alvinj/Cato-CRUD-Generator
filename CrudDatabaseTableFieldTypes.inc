@@ -10,11 +10,26 @@ $field_types_map = array(
   'timestamp' => 'Timestamp'
 );
 
+# JsBoolean is untested.
+# Other possible types are JsNull, JsArray, and JsObject.
+# 'blob' should map to JsObject, but I keep hitting it for MySQL text
+# fields, so I map it here as JsString.
+$play_json_field_types_map = array(
+  'blob'    => 'JsString',
+  'boolean' => 'JsBoolean',
+  'date'    => 'JsString',
+  'integer' => 'JsNumber',
+  'long'    => 'JsNumber',
+  'float'   => 'JsNumber',
+  'text'    => 'JsString',
+  'timestamp' => 'JsString'
+);
+
 $scala_field_types_map = array(
   'blob'    => 'Object' ,
   'date'    => 'Date',
   'integer' => 'Integer',
-  'long' => 'Long',
+  'long'    => 'Long',
   'text'    => 'String',
   'timestamp' => 'Timestamp'
 );
@@ -36,7 +51,6 @@ $play_optional_field_types_map = array(
   'long' => 'optional(longNumber)',
   'timestamp' => 'sqlDate'
 );
-
 
 ?>
 

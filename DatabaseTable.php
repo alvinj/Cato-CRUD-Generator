@@ -49,6 +49,7 @@ class DatabaseTable
   private $java_field_types = array();
   private $scala_field_types = array();
   private $play_field_types = array();
+  private $play_json_field_types = array();
   
   # an array that tells whether the desired fields are required (not null), or not
   private $field_is_reqd = array();
@@ -197,7 +198,33 @@ class DatabaseTable
     return $this->scala_field_type;
   }
 
+
+  function get_play_json_field_types()
+  {
+    include 'CrudDatabaseTableFieldTypes.inc';
+
+    $count = 0;
+    foreach ($this->db_field_types as $field_type)
+    {
+      $play_json_field_type = $play_json_field_types_map[$field_type];
+      if (isset($play_json_field_type)) {
+        $this->play_json_field_type[$count] = $play_json_field_type;
+      }
+      else {
+        # couldn't find a corresponding value in the map
+        $this->play_json_field_type[$count] = 'UNKNOWN';
+      }
+      // kludge for the 'id' field
+      if ($this->raw_field_names[$count] == 'id') $this->play_json_field_type[$count] = 'JsNumber';
+      $count++;
+    }
+    return $this->play_json_field_type;
+  }
+
+
+  #
   # return an array of field types for the Scala Play Framework.
+  #
   function get_play_field_types()
   {
     include 'CrudDatabaseTableFieldTypes.inc';

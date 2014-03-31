@@ -18,9 +18,9 @@
           // SEE http://www.playframework.com/documentation/2.2.x/ScalaJson
     <<section name=id loop=$camelcase_fields>>
     <<if ($field_is_reqd[id] == true) >>
-    "<<$camelcase_fields[id]>>" -> Js<<$scala_field_types[id]|capitalize>>(<<$objectname>>.<<$camelcase_fields[id]>>),
+    "<<$camelcase_fields[id]>>" -> <<$play_json_field_types[id]|capitalize>>(<<$objectname>>.<<$camelcase_fields[id]>>),
     <<else>>
-    "<<$camelcase_fields[id]>>" -> Js<<$scala_field_types[id]|capitalize>>(<<$objectname>>.<<$camelcase_fields[id]>>.getOrElse("")),
+    "<<$camelcase_fields[id]>>" -> <<$play_json_field_types[id]|capitalize>>(<<$objectname>>.<<$camelcase_fields[id]>>.getOrElse("")),
     <</if>>
     <</section>>
           )
@@ -33,9 +33,9 @@
       def reads(json: JsValue): JsResult[<<$classname|capitalize>>] = {
    <<section name=id loop=$camelcase_fields>>
    <<if ($field_is_reqd[id] == true) >>
-   val <<$camelcase_fields[id]>> = (json \ "<<$camelcase_fields[id]>>").as[<<$scala_field_types[id]|capitalize>>]
+   val <<$camelcase_fields[id]>> = (json \ "<<$camelcase_fields[id]>>").as[<<$play_json_field_types[id]|capitalize>>]
    <<else>>
-   val <<$camelcase_fields[id]>> = (json \ "<<$camelcase_fields[id]>>").asOpt[<<$scala_field_types[id]|capitalize>>]
+   val <<$camelcase_fields[id]>> = (json \ "<<$camelcase_fields[id]>>").asOpt[<<$play_json_field_types[id]|capitalize>>]
    <</if>>
    <</section>>
    JsSuccess(<<$classname|capitalize>>(<<$fields_as_insert_csv_string>>))

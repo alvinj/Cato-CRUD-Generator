@@ -153,6 +153,7 @@ $smarty->assign('prep_stmt_as_update_csv_string', $dt->get_fields_as_update_stmt
 $smarty->assign('types', $dt->get_java_field_types());
 $smarty->assign('scala_field_types', $dt->get_scala_field_types());
 $smarty->assign('play_field_types', $dt->get_play_field_types());
+$smarty->assign('play_json_field_types', $dt->get_play_json_field_types());
 $smarty->assign('db_types', $dt->get_db_field_types());
 $smarty->assign('dt', $dt);
 
