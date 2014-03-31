@@ -49,8 +49,8 @@ You can see a short demo in action at this URL:
 
   http://www.catocrudgenerator.com/screenshots-crud-generator/
 
-Our INSTALL file describes the process of installing Cato, which
-we've also tried to make as painless as possible.
+The INSTALL file describes the process of installing Cato, which
+I've also tried to make as painless as possible.
 
 
 Template Files
