@@ -15,16 +15,15 @@ Cato is a CRUD generator that can be used to generate files for any
 programming language or tool. For instance, you can generate any of 
 these CRUD-based files, and many more:
 
-  * The Play Framework
-  * Drupal form files
-  * Java model classes
-  * Java JSP files
-  * Spring Framework XML files
-  * Ruby on Rails files
-  * CakePHP files
-  * SQL statements for any language
-  * Anything else you can imagine that can be driven off your
-    database tables
+* The Play Framework
+* Drupal form files
+* Java model classes
+* Java JSP files
+* Spring Framework XML files
+* Ruby on Rails files
+* CakePHP files
+* SQL statements for any language
+* Anything else you can imagine that can be driven off your database tables
 
 All you have to do is tell Cato where your database is, define
 some template files (as needed), then point and click to
