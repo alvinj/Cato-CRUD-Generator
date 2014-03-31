@@ -53,16 +53,30 @@ you can install Cato very easily, as follows.
 2) While this step is optional, I've found it easier when 
    I have multiple web apps running on my computer.
 
-   Create an entry in your "hosts" file for Cato. On my Mac
-   I edit /etc/hosts, and add an entry for Cato like this:
+   (a) Create an entry in your "hosts" file for Cato. On my Mac
+       I edit /etc/hosts, and add an entry for Cato like this:
+    
+           127.0.0.1   cato
+  
+       In the real world, my actual entry looks like this:
    
-   127.0.0.1   cato
+           127.0.0.1   localhost sleetmute drupal6 cato
 
-   In the real world, my actual entry looks like this:
-   
-   127.0.0.1   localhost sleetmute drupal6 cato
+       Each of those names correspond to web apps I'm currently working on.
 
-   Each of those names correspond to web apps I'm currently working on.
+   (b) Add an entry like this to your Apache httpd.conf file:
+
+       <VirtualHost 127.0.0.1>
+         ServerName cato
+         DocumentRoot /Applications/MAMP/htdocs/cato
+         <Directory /Applications/MAMP/htdocs/cato>
+           DirectoryIndex index.php
+           AllowOverride All
+           Order allow,deny
+           Allow from all
+         </Directory>
+       </VirtualHost>
+
 
 3) Edit the Cato configuration files. The main file you
    need to configure is "db.cfg". This file tells Cato how to 
