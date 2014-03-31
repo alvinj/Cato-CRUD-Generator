@@ -41,10 +41,10 @@ Using Cato
 
 Once installed, using Cato is easy to use. From the main screen:
 
-1 Select the database table you'd like to generate CRUD from.
-2 Select the table fields you want to include.
-3 Select the template for the output you want to generate.
-4 Click the "Generate" button.
+1. Select the database table you'd like to generate CRUD from.
+2. Select the table fields you want to include.
+3. Select the template for the output you want to generate.
+4. Click the "Generate" button.
 
 You can see a short demo in action at this URL:
 
