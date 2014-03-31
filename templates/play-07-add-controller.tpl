@@ -1,3 +1,9 @@
+  // ======================================================
+  // Use one of the  options below in your controller file,
+  // app/controllers/<<$classname>>s.scala
+  // ======================================================
+
+  // (A) non-async controller method with a Play view
   def add = Action {
     Ok(html.<<$objectname>>.form(<<$objectname>>Form))
   }
@@ -16,3 +22,9 @@
       }
     )
   }
+
+
+  // (B) async 'add' with json (TODO)
+
+
+

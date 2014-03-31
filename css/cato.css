@@ -22,7 +22,7 @@ body, caption, th, td, input, textarea, select, option, legend, fieldset
 
 textarea {
   font-family: Monaco;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 /* TODO this looks really different between firefox and chrome */

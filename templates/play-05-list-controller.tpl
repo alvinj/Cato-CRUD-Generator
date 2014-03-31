@@ -1,7 +1,7 @@
-  // ======================================================
-  // Use one of the three options below in your model file,
-  // app/models/<<$classname>>.scala
-  // ======================================================
+  // ===========================================================
+  // Use one of the three options below in your controller file,
+  // app/controllers/<<$classname>>.scala
+  // ===========================================================
 
   // (A) non-async with a Play view
   // ------------------------------
