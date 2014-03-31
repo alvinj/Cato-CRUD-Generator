@@ -1,13 +1,14 @@
-Project Cato README File
+Cato
+====
 
-UPDATE
-------
+Updates
+-------
 
 As of January 10, 2013, Cato now supports the Play Framework v2.x.  
 As of March 31, 2014, Cato now supports Play Framework 2.x JSON code.
 
 
-INTRODUCTION
+Introduction
 ------------
 
 Cato is a CRUD generator that can be used to generate files for any 
@@ -35,7 +36,7 @@ processes of Ruby on Rails and CakePHP, but it is (a) independent of
 programming language, and (b) available through a web GUI.
 
 
-USING CATO
+Using Cato
 ----------
 
 Once installed, using Cato is easy to use. From the main screen:
@@ -53,7 +54,7 @@ Our INSTALL file describes the process of installing Cato, which
 we've also tried to make as painless as possible.
 
 
-TEMPLATE FILES
+Template Files
 --------------
 
 As you saw in that demo, Cato generates its CRUD output based on
@@ -70,7 +71,7 @@ can learn much more about Smarty templates at this URL:
   http://www.smarty.net/
 
 
-MORE INFORMATION
+More Information
 ----------------
 
 You can find more information about the Cato Project at this URL:
@@ -91,7 +92,7 @@ See the "Play Framework 2 CRUD with Cato" video here:
   http://alvinalexander.com/scala/crud-forms-play-framework-2-cato-crud-generator
 
 
-THE NAME "CATO"
+The Name "Cato"
 ---------------
 
 The name "Cato" comes from the character on the old Pink Panther
