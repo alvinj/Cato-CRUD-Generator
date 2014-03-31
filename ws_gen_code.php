@@ -156,6 +156,11 @@ $smarty->assign('play_field_types', $dt->get_play_field_types());
 $smarty->assign('db_types', $dt->get_db_field_types());
 $smarty->assign('dt', $dt);
 
+# try to disable caching so template changes are picked up immediately
+#$smarty->force_compile = 1;
+#$smarty->clear_compiled_tpl("$template");
+$smarty->clear_cache("$template");
+
 # read and process the template with fetch(), then echo it out
 $out = $smarty->fetch("$template");
 echo $out;

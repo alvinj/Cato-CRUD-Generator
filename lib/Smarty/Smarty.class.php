@@ -139,7 +139,7 @@ class Smarty extends Smarty_Internal_Data {
     // config directory
     public $config_dir = null;
     // force template compiling?
-    public $force_compile = false;
+    public $force_compile = true;
     // check template for modifications?
     public $compile_check = true;
     // locking concurrent compiles

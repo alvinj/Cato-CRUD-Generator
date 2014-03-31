@@ -1,3 +1,5 @@
+// FOO
+
 // this is a Sencha ExtJS 'form'
 // this is a form to let the user add and edit a <<$classname|capitalize>>
 
