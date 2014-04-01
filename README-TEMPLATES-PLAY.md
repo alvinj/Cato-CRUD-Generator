@@ -41,7 +41,7 @@ the MySQL `desc transactions` command:
     | price     | decimal(10,2) | NO   |     | NULL              |                |
     | date_time | timestamp     | NO   |     | CURRENT_TIMESTAMP |                |
     | notes     | text          | YES  |     | NULL              |                |
-   +-----------+---------------+------+-----+-------------------+----------------+
+    +-----------+---------------+------+-----+-------------------+----------------+
 
 Given that database table, let's look at how Cato generates Play/Scala code.
 
@@ -258,6 +258,10 @@ Cato generates the following Play Framework 'model' class code:
 As you can see, the code isn't perfect, but it's close, very close. Just delete the trailing
 commas, and you're in business.
 
+Truth in advertising: The code spacing isn't perfect. I modified some of the indentation
+to make the code easier to read. Until I get the code spacing just right, you'll have to
+fix the indentation in your IDE.
+
 
 Play Framework JSON Model Code
 ------------------------------
@@ -292,14 +296,14 @@ table:
           // TODO delete trailing comma
           // DATE example: "datetime" -> JsString(sdf.format(researchLink.datetime)),
           // SEE http://www.playframework.com/documentation/2.2.x/ScalaJson
-            "id" -> JsNumber(transaction.id),
-                "symbol" -> JsString(transaction.symbol),
-                "ttype" -> JsString(transaction.ttype),
-                "quantity" -> JsNumber(transaction.quantity),
-                "price" -> JsNumber(transaction.price),
-                "dateTime" -> JsString(transaction.dateTime),
-                "notes" -> JsString(transaction.notes.getOrElse("")),
-                  )
+              "id" -> JsNumber(transaction.id),
+              "symbol" -> JsString(transaction.symbol),
+              "ttype" -> JsString(transaction.ttype),
+              "quantity" -> JsNumber(transaction.quantity),
+              "price" -> JsNumber(transaction.price),
+              "dateTime" -> JsString(transaction.dateTime),
+              "notes" -> JsString(transaction.notes.getOrElse("")),
+          )
           JsObject(transactionSeq)
       }
     
@@ -308,12 +312,12 @@ table:
       // DATE fields should be like: val datetime = (json \ "datetime").as[java.util.Date]
       def reads(json: JsValue): JsResult[Transaction] = {
          val id = (json \ "id").as[JsNumber]
-            val symbol = (json \ "symbol").as[JsString]
-            val ttype = (json \ "ttype").as[JsString]
-            val quantity = (json \ "quantity").as[JsNumber]
-            val price = (json \ "price").as[JsNumber]
-            val dateTime = (json \ "dateTime").as[JsString]
-            val notes = (json \ "notes").asOpt[JsString]
+         val symbol = (json \ "symbol").as[JsString]
+         val ttype = (json \ "ttype").as[JsString]
+         val quantity = (json \ "quantity").as[JsNumber]
+         val price = (json \ "price").as[JsNumber]
+         val dateTime = (json \ "dateTime").as[JsString]
+         val notes = (json \ "notes").asOpt[JsString]
          JsSuccess(Transaction(id,symbol,ttype,quantity,price,date_time,notes))
       }
     }
