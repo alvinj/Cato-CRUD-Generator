@@ -15,8 +15,8 @@ specifically:
 * Table names are plural, like `users`, `stocks`, and `transactions`
 * Table names made from multiple words are separated by underscores,
   as in `research_links`
-* Field names are also assumed to use underscores, such as the name
-  `date_time`
+* Field names made from multiple words are also assumed to use 
+  underscores, such as the name `date_time`
 
 To show how Cato works I need a sample database table. For the purposes 
 of this discussion, I'll generate code from the following MySQL table 
@@ -70,13 +70,13 @@ _conf/routes_ file:
     GET     /<<$tablename>>/:id/edit        controllers.<<$tablename|capitalize>>.edit(id: Long)
     GET     /<<$tablename>>/:id/delete      controllers.<<$tablename|capitalize>>.delete(id: Long)
 
-This file is named _play-01-routes.tpl_, and it's located in the _templates_
+This template file is named _play-01-routes.tpl_, and it's located in the _templates_
 directory. Cato works with the "Smarty Template" system, and variables are
 placed inside the `<<` and `>>` characters. Variables such as `$tablename`,
 `$classname`, `$objectname`, and many more are made available to you by Cato.
 
-If you apply that template file to all of the fields in the `transactions` database
-table, you'll generate the following output:
+If you use Cato to apply that template file to the `transactions` database table, Cato will 
+generate the following output:
 
     # put this code in your module's "conf/routes" file
     
@@ -86,9 +86,9 @@ table, you'll generate the following output:
     GET     /transactions/:id/edit        controllers.Transactions.edit(id: Long)
     GET     /transactions/:id/delete      controllers.Transactions.delete(id: Long)
 
-As you can see, in simple examples, this is very straightforward. The only secret is
+As you can see, in simple examples this is very straightforward. The only secret is
 knowing a little bit about the Smarty Template syntax, and the variables Cato makes
-available to you. The variables are described in this project's _README-TEMPLATES_ file.
+available to you. (The variables are described in this project's _README-TEMPLATES_ file.)
 
 
 Stub Code for a Play Framework Controller
@@ -106,7 +106,6 @@ contains this code:
     import play.api.data.validation.Constraints._
     import views._
     import models._
-    import scala.collection.mutable.ArrayBuffer
     
     object <<$tablename|capitalize>> extends Controller {
     
@@ -133,7 +132,6 @@ When applied to the `transactions` table, Cato generates the following Play/Scal
     import play.api.data.validation.Constraints._
     import views._
     import models._
-    import scala.collection.mutable.ArrayBuffer
     
     object Transactions extends Controller {
     
@@ -333,7 +331,8 @@ table:
     }
 
 I haven't worked out all the kinks in the process, but I think you'll agree that this
-code gives you something to work with. Just make a few changes, and you're in business.
+code gives you something to work with. (If you look at the code, you'll see that I even
+handle `Option` fields.) Just make a few changes, and you're in business.
 It sure beats the heck out of typing the whole thing by hand.
 
 
@@ -384,7 +383,8 @@ options for how you want your `list` method to work:
 * An async method that outputs JSON code.
 
 Just use whichever version of the method you want, and once again you're
-quickly in business.
+quickly in business. Other template files generate `add`, `delete`, and
+`update` controller actions.
 
 
 Play Anorm SQL Methods
@@ -457,7 +457,7 @@ It can also generate an Anorm `find` method:
       }
     }
 
-as well as an `update` method:
+as well as an Anorm `update` method:
 
     // (2) UPDATE
     // TODO - fix commas
