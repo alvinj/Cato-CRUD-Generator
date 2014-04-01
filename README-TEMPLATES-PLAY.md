@@ -31,6 +31,11 @@ conventions that Ruby on Rails uses, specifically:
 * Field names made from multiple words are also assumed to use 
   underscores, such as the name `date_time`
 
+Note: If you don't know what Cato is, I strongly recommend watching the
+short video at this link before reading any more:
+
+* http://alvinalexander.com/scala/crud-forms-play-framework-2-cato-crud-generator
+
 
 A Sample Table
 --------------
