@@ -8,9 +8,19 @@ set of Play Framework templates.
 Database
 --------
 
-Cato generates code from database tables, so to show how Cato works,
-I need a sample database table. For the purposes of this discussion,
-I'll generate code from the following MySQL table named `transactions`:
+Cato generates code from database tables. It assumes that you use
+the same database table name convention that Ruby on Rails uses,
+specifically:
+
+* Table names are plural, like `stocks` and `transactions`
+* Table names made from multiple words are separated by underscores,
+  as in `research_links`
+* Field names are also assumed to use underscores, such as the name
+  `date_time`
+
+To show how Cato works I need a sample database table. For the purposes 
+of this discussion, I'll generate code from the following MySQL table 
+named `transactions`:
 
     create table transactions (
         id int auto_increment not null,
