@@ -562,9 +562,9 @@ will be generated:
     The output from these variables is shown below. Each section
     is generated with a loop that looks like this:
     
-        section name=id loop=$VARNAME
-        $VARNAME[id]
-        /section
+        <<section name=id loop=$VARNAME>>
+        <<$VARNAME[id]>>
+        <</section>>
     
     Here is the output for each array when applied to the fields
     in the table you selected::
