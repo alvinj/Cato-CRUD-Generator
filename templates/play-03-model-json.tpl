@@ -1,3 +1,7 @@
+  // copy this code to the `object` in your 
+  // app/models/<<$classname>>.scala file
+  // ======================================
+
   /**
    * JSON Serializer Code
    * --------------------

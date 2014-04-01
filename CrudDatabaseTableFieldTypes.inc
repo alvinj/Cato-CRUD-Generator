@@ -6,6 +6,8 @@ $field_types_map = array(
   'blob'    => 'Object' ,
   'date'    => 'Date',
   'integer' => 'int',
+  'double'  => 'double',
+  'float'   => 'double',
   'text'    => 'String',
   'timestamp' => 'Timestamp'
 );
@@ -27,11 +29,12 @@ $play_json_field_types_map = array(
 
 $scala_field_types_map = array(
   'blob'    => 'Object' ,
-  'date'    => 'Date',
+  'date'    => 'java.util.Date',
+  'float'   => 'Double',
   'integer' => 'Integer',
   'long'    => 'Long',
   'text'    => 'String',
-  'timestamp' => 'Timestamp'
+  'timestamp' => 'java.util.Date'
 );
 
 $play_reqd_field_types_map = array(
