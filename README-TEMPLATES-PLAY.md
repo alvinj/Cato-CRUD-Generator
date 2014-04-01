@@ -50,7 +50,7 @@ The Play Framework routes File
 ------------------------------
 
 As a simple example of how Cato works, here's the template for a Play Framework
-`routes` file:
+_conf/routes_ file:
 
     # put this code in your module's "conf/routes" file
     
