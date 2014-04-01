@@ -143,7 +143,7 @@ When applied to the `transactions` table, Cato generates the following Play/Scal
        
        def delete(id: Long) = TODO
     
-      def edit(id: Long) = TODO
+       def edit(id: Long) = TODO
       
     }
 
