@@ -97,6 +97,9 @@ directory. Cato works with the "Smarty Template" system, and variables are
 placed inside the `<<` and `>>` characters. Variables such as `$tablename`,
 `$classname`, `$objectname`, and many more are made available to you by Cato.
 
+(See the Reference section at the end of this document for a list of all
+the variables that Cato makes available to your template files.)
+
 If you use Cato to apply that template file to the `transactions` database table, Cato will 
 generate the following output:
 
