@@ -12,7 +12,7 @@ Cato generates code from database tables. It assumes that you use
 the same database table name convention that Ruby on Rails uses,
 specifically:
 
-* Table names are plural, like `stocks` and `transactions`
+* Table names are plural, like `users`, `stocks`, and `transactions`
 * Table names made from multiple words are separated by underscores,
   as in `research_links`
 * Field names are also assumed to use underscores, such as the name
