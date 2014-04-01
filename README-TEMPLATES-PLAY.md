@@ -1,22 +1,35 @@
 Play Framework Templates
 ========================
 
-This document describes how Cato works with the current
-set of Play Framework templates.
+This document describes how Cato can generate Play Framework source code,
+including code for the _conf/routes_ file, and Play model, view, and controller
+files.
 
 
-Database
---------
+How Cato Works
+--------------
 
-Cato generates code from database tables. It assumes that you use
-the same database table name convention that Ruby on Rails uses,
-specifically:
+Cato generates source code from database tables. It reads the database
+table you select, along with the template file you select, and generates
+code from those two sources.
+
+Because Cato works with templates, it can be used to generate all kinds of
+output, including Java class files, Spring Framework files, Scala classes
+and case classes, Drupal forms, and much more. The focus of this article
+is on the Play Framework code Cato can generate.
+
+Cato assumes that you use the same database table and field naming 
+conventions that Ruby on Rails uses, specifically:
 
 * Table names are plural, like `users`, `stocks`, and `transactions`
 * Table names made from multiple words are separated by underscores,
   as in `research_links`
 * Field names made from multiple words are also assumed to use 
   underscores, such as the name `date_time`
+
+
+A Sample Table
+--------------
 
 To show how Cato works I need a sample database table. For the purposes 
 of this discussion, I'll generate code from the following MySQL table 
@@ -56,8 +69,8 @@ the MySQL `desc transactions` command:
 Given that database table, let's look at how Cato generates Play/Scala code.
 
 
-The Play Framework routes File
-------------------------------
+Generating a Play Framework routes File
+---------------------------------------
 
 As a simple example of how Cato works, here's the template for a Play Framework
 _conf/routes_ file:
@@ -94,7 +107,7 @@ available to you. (The variables are described in this project's _README-TEMPLAT
 Stub Code for a Play Framework Controller
 -----------------------------------------
 
-As a second simple example, the template file named _play-02-controller.tpl_
+As a second example, the template file named _play-02-controller.tpl_
 contains this code:
 
     package controllers
@@ -499,11 +512,131 @@ Cato is open, so you can create your own! You'll find all of the current templat
 under the _templates_ directory.
 
 
+Reference
+---------
 
+The special template file named _00-variable-examples.tpl_ shows the variables
+that Cato makes available to you, along with their output. For example, if you
+select the `transactions` table and this template file, the following output
+will be generated:
 
+    // this file shows the output that cato variables produce.
+    // just select a database table and its fields, then generate
+    // output with this template to see the output each variable
+    // produces
+    
+    Variable Name                     Generated Output
+    -------------                     ----------------
+    $classname:                       Transaction
+    $objectname:                      transaction
+    $tablename:                       transactions
+    $fields_as_insert_csv_string:     id,symbol,ttype,quantity,price,date_time,notes
+    $prep_stmt_as_insert_csv_string:  ?,?,?,?,?,?,?
+    $prep_stmt_as_update_csv_string:  id=?,symbol=?,ttype=?,quantity=?,price=?,date_time=?,notes=?
+    
+    Array Variables
+    ---------------
+    The following variables are meant to be used in loops:
+    
+    $camelcase_fields:                Array
+    $fields:                          Array
+    $field_is_reqd:                   Array
+    $types:                           Array
+    $scala_field_types:               Array
+    $play_field_types:                Array
+    $play_json_field_types:           Array
+    $db_types:                        Array
+    
+    The output from these variables is shown below. Each section
+    is generated with a loop that looks like this:
+    
+        section name=id loop=$VARNAME
+        $VARNAME[id]
+        /section
+    
+    Here is the output for each array when applied to the fields
+    in the table you selected::
+    
+    $camelcase_fields[id]
+    ---------------------
+    id
+    symbol
+    ttype
+    quantity
+    price
+    dateTime
+    notes
+    
+    $db_types[id]
+    -------------
+    integer
+    text
+    text
+    integer
+    float
+    timestamp
+    blob
+    
+    $fields[id]
+    -----------
+    id
+    symbol
+    ttype
+    quantity
+    price
+    date_time
+    notes
+    
+    $field_is_reqd[id]
+    ------------------
+    1
+    1
+    1
+    1
+    1
+    1
+    
+    $play_field_types[id]
+    ---------------------
+    longNumber
+    nonEmptyText
+    nonEmptyText
+    number
+    UNKNOWN
+    sqlDate
+    optional(text)
+    
+    $play_json_field_types[id]
+    --------------------------
+    JsNumber
+    JsString
+    JsString
+    JsNumber
+    JsNumber
+    JsString
+    JsString
+    
+    $scala_field_types
+    ------------------
+    Long
+    String
+    String
+    Integer
+    Double
+    java.util.Date
+    Object
+    
+    $types[id] (these are Java field types)
+    ---------------------------------------
+    int
+    String
+    String
+    int
+    double
+    Timestamp
+    Object
 
-
-
-
-
+Hopefully seeing (a) the names of these variables and (b) the output they generate
+will be helpful to you. Please grep through the current template files to see how
+these variables are used to generate real, working code.
 
