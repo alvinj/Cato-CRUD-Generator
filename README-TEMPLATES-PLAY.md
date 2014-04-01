@@ -248,18 +248,18 @@ Cato generates the following Play Framework 'model' class code:
       import play.api.Play.current 
       import play.api.db.DB
       def selectAll(): List[Transaction] = DB.withConnection { implicit connection => 
-        sqlQuery().map ( row =>
-          Transaction(
-              row[Long]("id"),
-              row[String]("symbol"),
-              row[String]("ttype"),
-              row[Integer]("quantity"),
-              row[Double]("price"),
-              row[java.util.Date]("date_time"),
-              row[Option[Object]]("notes"),
-          )
-        ).toList
-      }
+          sqlQuery().map ( row =>
+              Transaction(
+                  row[Long]("id"),
+                  row[String]("symbol"),
+                  row[String]("ttype"),
+                  row[Integer]("quantity"),
+                  row[Double]("price"),
+                  row[java.util.Date]("date_time"),
+                  row[Option[Object]]("notes"),
+              )
+          ).toList
+        }
     
     }
 
@@ -299,11 +299,11 @@ table:
       // convert from Transaction object to JSON (serializing to JSON)
       def writes(transaction: Transaction): JsValue = {
           val sdf = new SimpleDateFormat("yyyy-MM-dd")
-          val transactionSeq = Seq(
           // VERIFY valid types are JsString, JsNumber, JsBoolean, JsArray, JsNull, JsObject
           // TODO delete trailing comma
           // DATE example: "datetime" -> JsString(sdf.format(researchLink.datetime)),
           // SEE http://www.playframework.com/documentation/2.2.x/ScalaJson
+          val transactionSeq = Seq(
               "id" -> JsNumber(transaction.id),
               "symbol" -> JsString(transaction.symbol),
               "ttype" -> JsString(transaction.ttype),
@@ -319,14 +319,14 @@ table:
       // @see http://www.playframework.com/documentation/2.2.x/ScalaJson regarding Option
       // DATE fields should be like: val datetime = (json \ "datetime").as[java.util.Date]
       def reads(json: JsValue): JsResult[Transaction] = {
-         val id = (json \ "id").as[JsNumber]
-         val symbol = (json \ "symbol").as[JsString]
-         val ttype = (json \ "ttype").as[JsString]
-         val quantity = (json \ "quantity").as[JsNumber]
-         val price = (json \ "price").as[JsNumber]
-         val dateTime = (json \ "dateTime").as[JsString]
-         val notes = (json \ "notes").asOpt[JsString]
-         JsSuccess(Transaction(id,symbol,ttype,quantity,price,date_time,notes))
+          val id = (json \ "id").as[JsNumber]
+          val symbol = (json \ "symbol").as[JsString]
+          val ttype = (json \ "ttype").as[JsString]
+          val quantity = (json \ "quantity").as[JsNumber]
+          val price = (json \ "price").as[JsNumber]
+          val dateTime = (json \ "dateTime").as[JsString]
+          val notes = (json \ "notes").asOpt[JsString]
+          JsSuccess(Transaction(id,symbol,ttype,quantity,price,date_time,notes))
       }
     }
 
@@ -350,7 +350,7 @@ you:
     // (A) non-async with a Play view
     // ------------------------------
     def list = Action {
-      Ok(html.transaction.list(Transaction.selectAll, transactionForm))
+        Ok(html.transaction.list(Transaction.selectAll, transactionForm))
     }
     
     // needed for json
@@ -361,7 +361,7 @@ you:
     // (B) non-async with json
     // -----------------------
     def list = Action {
-      Ok(Json.toJson(Transaction.selectAll))
+        Ok(Json.toJson(Transaction.selectAll))
     }
     
     // (C) async with json
@@ -371,8 +371,8 @@ you:
     import play.api.libs.concurrent.Execution.Implicits.defaultContext
     
     def list = Action.async {
-      val transactionAsFuture = scala.concurrent.Future{ Transaction.selectAll }
-      transactionAsFuture.map(result => Ok(Json.toJson(result)))
+        val transactionAsFuture = scala.concurrent.Future{ Transaction.selectAll }
+        transactionAsFuture.map(result => Ok(Json.toJson(result)))
     }
 
 In this case the template file _play-05-list-controller.tpl_ gives you several
@@ -396,28 +396,28 @@ Anorm `insert` method for you:
     // TODO delete trailing commas
     // TODO delete the 'id' field
     def insert(transaction: Transaction): Boolean = {
-      DB.withConnection { implicit c =>
-        SQL("""
-            insert into transactions (id,symbol,ttype,quantity,price,date_time,notes) 
-            values (
-              {symbol},
-              {ttype},
-              {quantity},
-              {price},
-              {dateTime},
-              {notes},
+        DB.withConnection { implicit c =>
+            SQL("""
+                insert into transactions (id,symbol,ttype,quantity,price,date_time,notes) 
+                values (
+                    {symbol},
+                    {ttype},
+                    {quantity},
+                    {price},
+                    {dateTime},
+                    {notes},
+                  )
+                  """
             )
-            """
-        )
-        .on(
-          'symbol -> transaction.symbol,
-          'ttype -> transaction.ttype,
-          'quantity -> transaction.quantity,
-          'price -> transaction.price,
-          'dateTime -> transaction.dateTime,
-          'notes -> transaction.notes,
-        ).executeUpdate() == 1
-      }
+            .on(
+                'symbol -> transaction.symbol,
+                'ttype -> transaction.ttype,
+                'quantity -> transaction.quantity,
+                'price -> transaction.price,
+                'dateTime -> transaction.dateTime,
+                'notes -> transaction.notes,
+            ).executeUpdate() == 1
+        }
     }
 
 Once again you have to delete a few trailing commas, but the rest of the code
@@ -426,12 +426,12 @@ is in good shape.
 In a similar way Cato can generate the following Anorm `delete` method:
 
     def delete(id: Long): Int = {
-      DB.withConnection { implicit c =>
-        val nRowsDeleted = SQL("DELETE FROM transactions WHERE id = {id}")
-          .on('id -> id)
-          .executeUpdate()
-        nRowsDeleted
-      }
+        DB.withConnection { implicit c =>
+            val nRowsDeleted = SQL("DELETE FROM transactions WHERE id = {id}")
+                .on('id -> id)
+                .executeUpdate()
+            nRowsDeleted
+        }
     }
 
 It can also generate an Anorm `find` method:
@@ -439,22 +439,22 @@ It can also generate an Anorm `find` method:
     // (1) FIND
     // TODO - delete trailing comma
     def findById(id: Long): Transaction = {
-      DB.withConnection { implicit c =>
-        val row = SQL("SELECT * FROM transactions WHERE id = {id}")
-          .on('id -> id)
-          .apply
-          .head
-        val transaction = Transaction(
-          row[Long]("id"),
-          row[String]("symbol"),
-          row[String]("ttype"),
-          row[Integer]("quantity"),
-          row[Double]("price"),
-          row[Java.Util.Date]("date_time"),
-          row[Option[Object]]("notes"),
-        )
-        contact
-      }
+        DB.withConnection { implicit c =>
+            val row = SQL("SELECT * FROM transactions WHERE id = {id}")
+                .on('id -> id)
+                .apply
+                .head
+            val transaction = Transaction(
+                row[Long]("id"),
+                row[String]("symbol"),
+                row[String]("ttype"),
+                row[Integer]("quantity"),
+                row[Double]("price"),
+                row[Java.Util.Date]("date_time"),
+                row[Option[Object]]("notes"),
+            )
+            contact
+        }
     }
 
 as well as an Anorm `update` method:
@@ -462,28 +462,28 @@ as well as an Anorm `update` method:
     // (2) UPDATE
     // TODO - fix commas
     def update(transaction: Transaction) {
-      DB.withConnection { implicit c =>
-        SQL("""
-          update transactions set 
-          symbol = {symbol},
-          ttype = {ttype},
-          quantity = {quantity},
-          price = {price},
-          date_time = {dateTime},
-          notes = {notes},
-          where id={id}
-          """
-        )
-        .on(
-          'symbol -> transaction.symbol,
-          'ttype -> transaction.ttype,
-          'quantity -> transaction.quantity,
-          'price -> transaction.price,
-          'dateTime -> transaction.dateTime,
-          'notes -> transaction.notes,
-          'id -> transaction.id
-        ).executeUpdate()
-      }
+        DB.withConnection { implicit c =>
+            SQL("""
+                update transactions set 
+                symbol = {symbol},
+                ttype = {ttype},
+                quantity = {quantity},
+                price = {price},
+                date_time = {dateTime},
+                notes = {notes},
+                where id={id}
+                """
+            )
+            .on(
+                'symbol -> transaction.symbol,
+                'ttype -> transaction.ttype,
+                'quantity -> transaction.quantity,
+                'price -> transaction.price,
+                'dateTime -> transaction.dateTime,
+                'notes -> transaction.notes,
+                'id -> transaction.id
+            ).executeUpdate()
+        }
     }
 
 
