@@ -330,7 +330,7 @@ table:
       }
     }
 
-I haven't worked out all the kinks in the process, esepcially date fields, 
+I haven't worked out all the kinks in the process, especially date fields, 
 but I think you'll agree that this code gives you something to work with. 
 (If you look at the code, you'll see that I even handle `Option` fields.) 
 Just make a few changes, and you're in business.  It sure beats the heck 
