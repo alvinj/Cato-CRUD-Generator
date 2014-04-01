@@ -9,14 +9,18 @@ files.
 How Cato Works
 --------------
 
+I don't know about you, but I hate writing CRUD (Create, Read, Update, 
+and Delete) code. I won't say it's beneath me, but it's boring, and 
+error-prone. So I wrote Cato to generate CRUD code for me.
+
 Cato generates source code from database tables. It reads the database
 table you select, along with the template file you select, and generates
 code from those two sources.
 
-Because Cato works with templates, it can be used to generate all kinds of
+Because Cato works with _templates_, it can be used to generate all kinds of
 output, including Java class files, Spring Framework files, Scala classes
-and case classes, Drupal forms, and much more. The focus of this article
-is on the Play Framework code Cato can generate.
+and case classes, Anorm SQL code, Drupal forms, and much, much more. The 
+focus of this documentation is on the Play Framework code Cato can generate.
 
 Cato assumes that you use the same database table and field naming 
 conventions that Ruby on Rails uses, specifically:
