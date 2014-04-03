@@ -36,10 +36,10 @@ Ext.define('<<$APPLICATION_NAME>>.controller.<<$classname|capitalize>>', {
             '<<$classname|lower>>List button#delete': {
                 click: this.onDeleteTransactionButtonClicked
             },
-            '<<$classname|lower>>Form button#cancel': { //TransactionForm cancel button
+            '<<$classname|lower>>Form button#cancel': { //<<$classname>>Form cancel button
                 click: this.onAddTransactionFormCancelClicked
             },
-            '<<$classname|lower>>Form button#save': { //TransactionForm save button
+            '<<$classname|lower>>Form button#save': { //<<$classname>>Form save button
                 click: this.onAddTransactionFormSaveClicked
             }
         });
