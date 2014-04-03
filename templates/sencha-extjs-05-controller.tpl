@@ -31,16 +31,16 @@ Ext.define('<<$APPLICATION_NAME>>.controller.<<$classname|capitalize>>', {
                 render: this.onRender
             },
             '<<$classname|lower>>List button#add': {
-                click: this.onAddTransactionButtonClicked
+                click: this.onAdd<<$classname>>ButtonClicked
             },
             '<<$classname|lower>>List button#delete': {
-                click: this.onDeleteTransactionButtonClicked
+                click: this.onDelete<<$classname>>ButtonClicked
             },
             '<<$classname|lower>>Form button#cancel': { //<<$classname>>Form cancel button
-                click: this.onAddTransactionFormCancelClicked
+                click: this.onAdd<<$classname>>FormCancelClicked
             },
             '<<$classname|lower>>Form button#save': { //<<$classname>>Form save button
-                click: this.onAddTransactionFormSaveClicked
+                click: this.onAdd<<$classname>>FormSaveClicked
             }
         });
 
