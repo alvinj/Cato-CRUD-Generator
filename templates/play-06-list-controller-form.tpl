@@ -20,6 +20,10 @@
     ))
   )
 
+//
+// see this url for play framework form field mapping examples:
+// http://alvinalexander.com/scala/sample-play-framework-controller-forms-fields-mappings
+//
 
 //--------------------------------------
 // OTHER PLAY FRAMEWORK EXAMPLES & TYPES
