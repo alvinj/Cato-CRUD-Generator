@@ -1,11 +1,23 @@
-  // TODO - delete trailing comma
-  // TODO - use correct field types
+  // TODO - may need to adjust these field types; see the documentation below.
   val <<$objectname>>Form: Form[<<$classname>>] = Form(
     mapping(
 <<section name=id loop=$camelcase_fields>>
       "<<$camelcase_fields[id]>>" -> <<$play_field_types[id]>>,
 <</section>>
-    )(<<$classname>>.apply)(<<$classname>>.unapply)
+    )
+    // (1) <<$objectname>>Form -> <<$classname>>
+    // TODO probably won't need all these fields, such as 'id'
+    // DATE might want to use `Calendar.getInstance.getTime` to create a Date in your constructor
+    // ID might want to use 0 for your `id` field in constructor
+    ((<<$fields_as_insert_csv_string>>) => <<$classname>>(<<$fields_as_insert_csv_string>>))
+    //
+    // (2) <<$classname>> -> <<$objectname>>Form (form fields must match above)
+    // TODO delete trailing comma
+    ((<<$objectname>>: <<$classname>>) => Some(
+<<section name=id loop=$camelcase_fields>>
+      <<$objectname>>.<<$camelcase_fields[id]>>,
+<</section>>
+    ))
   )
 
 

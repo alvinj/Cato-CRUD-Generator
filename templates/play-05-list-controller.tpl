@@ -32,3 +32,20 @@
   }
 
 
+//
+// NOTES might need some of these import statements
+//
+
+import play.api._
+import play.api.mvc._
+import play.api.data._
+import play.api.data.Forms._
+import play.api.data.validation.Constraints._
+import views._
+import models._
+import play.api.libs.json._
+import play.api.libs.json.Json
+import play.api.libs.json.Json._
+import play.api.data.format.Formats._  // needed for `of[Double]` in mapping
+
+
