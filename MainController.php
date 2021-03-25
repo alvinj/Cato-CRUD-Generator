@@ -76,6 +76,7 @@ class MainController
     } else {
       # TODO log or display the error message here
     }
+    sort($arr);
     return $arr;
   }
   
